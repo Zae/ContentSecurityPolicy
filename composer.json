@@ -1,0 +1,28 @@
+{
+    "name": "zae/content-security-policy",
+    "description": "A really easy way to build CSP headers and add them to the response.",
+    "keywords": ["http", "csp", "content security policy", "laravel 5", "middleware"],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^5.4|^7.0"
+    },
+    "suggest": {
+        "paragonie/random_compat": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7"
+    },
+    "authors": [
+        {
+            "name": "Ezra Pool",
+            "email": "ezra@tsdme.nl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Zae\\ContentSecurityPolicy\\": "src/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

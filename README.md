@@ -39,6 +39,29 @@ return [
 ];
 ~~~
 
+### Craft 3
+The library includes a module for Craft 3 that can send the CSP header and a twig
+function to get the current CSP nonce.
+
+Register the module like this:
+
+~~~php
+'modules' => [
+    'csp' => \Zae\ContentSecurityPolicy\Craft\Module::class,
+],
+'bootstrap' => [
+    'csp'
+]
+~~~
+
+Use the twig functions like this:
+
+~~~php
+<script nonce="{{ cspnonce() }}">
+    // inline javascript
+</script>
+~~~
+
 ### Other
 
 Although not officially supported yet, it's possible to use this library with other frameworks,

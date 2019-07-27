@@ -1,14 +1,24 @@
 {
     "name": "zae/content-security-policy",
     "description": "A really easy way to build CSP headers and add them to the response.",
-    "keywords": ["http", "csp", "content security policy", "laravel 5", "middleware"],
+    "keywords": ["http", "csp", "content security policy", "laravel 5", "middleware", "twig", "craft 3"],
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^5.4|^7.0"
+        "php": "^5.5|^7.0",
+    },
+    "require-dev": {
+        "illuminate/support": "^5.0",
+        "illuminate/http": "^5.0",
+        "twig/twig": "^2.7",
+        "craftcms/cms": "^3.0"
     },
     "suggest": {
-        "paragonie/random_compat": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7"
+        "paragonie/random_compat": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+        "illuminate/support": "The included laravel/craft extension requires at least laravel support 5.0 or the complete framework",
+        "illuminate/http": "The included laravel extension requires at least laravel http 5.0 or the complete framework",
+        "twig/twig": "The included twig extension requires at least twig 2.7",
+        "craftcms/craft": "The included twig extension requires at least craft 3.0"
     },
     "authors": [
         {

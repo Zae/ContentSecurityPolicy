@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Contracts;
 
@@ -17,12 +18,12 @@ interface Directive
     /**
      * Get the key of the directive
      *
-     * @return mixed
+     * @return string
      */
-    function getKey();
+    function getKey(): string;
 
     /**
      * @param string $source
      */
-    public function addValue($source);
+    public function addValue($source): void;
 }

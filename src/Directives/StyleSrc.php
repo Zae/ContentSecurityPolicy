@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -7,8 +8,6 @@ namespace Zae\ContentSecurityPolicy\Directives;
  * @copyright Ezra Pool
  */
 
-use Zae\ContentSecurityPolicy\Builder;
-
 /**
  * Class StyleSrc
  *
@@ -16,10 +15,5 @@ use Zae\ContentSecurityPolicy\Builder;
  */
 class StyleSrc extends Directive
 {
-    const KEY = 'style-src';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'style-src';
 }

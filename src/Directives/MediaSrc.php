@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -14,10 +15,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class MediaSrc extends Directive
 {
-    const KEY = 'media-src';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'media-src';
 }

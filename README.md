@@ -16,15 +16,20 @@ $ composer require zae/content-security-policy
 
 ### Laravel
 
-#### Service Provider
-
-Add the service provider to the app.php file.
-
 #### Middleware 
 
 Add the middleware to the middleware Kernel.
 
-#### Config
+~~~php
+protected $middlewareGroups = [
+    'web' => [
+        ...
+        \Zae\ContentSecurityPolicy\Laravel\Http\Middleware\ContentSecurityPolicy::class
+    ],
+]
+~~~
+
+#### Config (config/csp.php)
 
 ~~~php
 return [

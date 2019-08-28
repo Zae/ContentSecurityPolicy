@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -12,13 +13,10 @@ namespace Zae\ContentSecurityPolicy\Directives;
  *
  * @package Zae\ContentSecurityPolicy\Directives
  */
-class BlockAllMixedContent extends NoValueDirective
+class BlockAllMixedContent extends Directive
 {
-    const KEY = 'block-all-mixed-content';
+    use NoValueDirective;
 
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'block-all-mixed-content';
 }
 

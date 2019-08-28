@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Laravel\Providers;
 
@@ -7,11 +8,12 @@ namespace Zae\ContentSecurityPolicy\Laravel\Providers;
  * @copyright Ezra Pool
  */
 
+use View;
+use Zae\ContentSecurityPolicy\Composers\CspViewComposer;
 use Zae\ContentSecurityPolicy\Contracts\Builder;
-use Zae\ContentSecurityPolicy\Factories\LaravelDirectivesFactory;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use \Zae\ContentSecurityPolicy\Builder as ConcreteCSP;
+use Zae\ContentSecurityPolicy\Contracts\NonceGenerator;
 
 /**
  * Class ServiceProvider
@@ -27,26 +29,19 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(['csp' => Builder::class], function()
-        {
-           return new ConcreteCSP();
-        });
+        $this->app->bind(NonceGenerator::class, ConcreteCSP::class);
+        $this->app->bind(Builder::class, ConcreteCSP::class);
+        $this->app->alias(Builder::class, 'csp');
     }
 
     /**
-     * @param Repository $config
+     * Boot the application services.
      */
-    public function boot(Repository $config)
+    public function boot(): void
     {
-        LaravelDirectivesFactory::create($this->app['csp'], $config);
-    }
-
-    /**
-     * @return array
-     */
-    public function provides()
-    {
-        return [ConcreteCSP::class];
+        View::composer(
+            '*', CspViewComposer::class
+        );
     }
 }
 

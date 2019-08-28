@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -14,10 +15,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class ScriptSrc extends Directive
 {
-    const KEY = 'script-src';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'script-src';
 }

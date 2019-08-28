@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -14,10 +15,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class ObjectSrc extends Directive
 {
-    const KEY = 'object-src';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'object-src';
 }

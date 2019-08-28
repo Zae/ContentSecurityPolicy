@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -16,10 +17,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class NavigationTo extends Directive
 {
-    const KEY = 'navigation-to';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'navigation-to';
 }

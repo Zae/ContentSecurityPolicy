@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Translators;
 
@@ -16,7 +17,12 @@ use Symfony\Component\HttpFoundation\HeaderBag;
  */
 class Laravel extends BaseTranslator
 {
-    public function translate($headers)
+    /**
+     * @param HeaderBag $headers
+     *
+     * @return HeaderBag
+     */
+    public function translate(HeaderBag $headers): HeaderBag
     {
         /** @var HeaderBag $headers */
         $builder = (string)$this->builder;

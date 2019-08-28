@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -14,13 +15,8 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class RequireSriFor extends Directive
 {
-    const KEY = 'require-sri-for';
+    public const KEY = 'require-sri-for';
 
-    const SRI_TYPE_SCRIPT = 'script';
-    const SRI_TYPE_STYLE = 'style';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const SRI_TYPE_SCRIPT = 'script';
+    public const SRI_TYPE_STYLE  = 'style';
 }

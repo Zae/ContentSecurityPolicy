@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Factories;
 
@@ -17,6 +18,7 @@ use Zae\ContentSecurityPolicy\Directives\DisownOpener;
 use Zae\ContentSecurityPolicy\Directives\FontSrc;
 use Zae\ContentSecurityPolicy\Directives\FormAction;
 use Zae\ContentSecurityPolicy\Directives\FrameAncestors;
+use Zae\ContentSecurityPolicy\Directives\FrameSrc;
 use Zae\ContentSecurityPolicy\Directives\ImgSrc;
 use Zae\ContentSecurityPolicy\Directives\ManifestSrc;
 use Zae\ContentSecurityPolicy\Directives\MediaSrc;
@@ -86,7 +88,8 @@ class FluidDirectivesFactory
         'scriptSrc'                 => ScriptSrc::class,
         'styleSrc'                  => StyleSrc::class,
         'upgradeInsecureRequests'   => UpgradeInsecureRequests::class,
-        'workerSrc'                 => WorkerSrc::class
+        'workerSrc'                 => WorkerSrc::class,
+        'frameSrc'                  => FrameSrc::class,
     ];
 
     /**
@@ -99,18 +102,19 @@ class FluidDirectivesFactory
      *
      * @param Builder $builder
      */
-    function __construct(Builder &$builder)
+    public function __construct(Builder $builder)
     {
         $this->builder = $builder;
     }
 
     /**
-     * @param $directive
+     * @param string $directive
      * @param $arguments
      *
      * @return $this
+     * @throws \Exception
      */
-    function __call($directive, $arguments)
+    public function __call(string $directive, $arguments): self
     {
         $class = $this->mapDirectives($directive);
         $settings = !empty($arguments[0]) ? $arguments[0] : null;
@@ -123,9 +127,9 @@ class FluidDirectivesFactory
     /**
      * @param string $name
      *
-     * @return mixed
+     * @return string
      */
-    private function mapDirectives($name)
+    private function mapDirectives(string $name): string
     {
         return static::$mapping[$name];
     }

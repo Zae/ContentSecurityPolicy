@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Collections;
 
@@ -10,6 +11,9 @@ namespace Zae\ContentSecurityPolicy\Collections;
 use Zae\ContentSecurityPolicy\Contracts\Directive;
 use Exception;
 use SplObjectStorage;
+use function get_class;
+use function iterator_to_array;
+use function sprintf;
 
 /**
  * Class Directives
@@ -26,8 +30,13 @@ class Directives extends SplObjectStorage
      */
     public function attach($object, $data = null)
     {
-        if (!is_a($object, Directive::class)) {
-            throw new Exception(sprintf('Only classes that implement %s are allowed', Directive::class));
+        if (!($object instanceof Directive)) {
+            throw new Exception(
+                sprintf(
+                    'Only classes that implement %s are allowed',
+                    Directive::class
+                )
+            );
         }
 
         parent::attach($object, $data);
@@ -46,16 +55,8 @@ class Directives extends SplObjectStorage
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $directives = [];
-
-        $this->rewind();
-
-        foreach ($this as $directive) {
-            $directives[] = $directive;
-        }
-
-        return $directives;
+        return iterator_to_array($this);
     }
 }

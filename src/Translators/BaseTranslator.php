@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Translators;
 
@@ -7,7 +8,8 @@ namespace Zae\ContentSecurityPolicy\Translators;
  * @copyright Ezra Pool
  */
 
-use Zae\ContentSecurityPolicy\Builder;
+use Symfony\Component\HttpFoundation\HeaderBag;
+use Zae\ContentSecurityPolicy\Contracts\Builder;
 
 /**
  * Class BaseTranslator
@@ -16,7 +18,7 @@ use Zae\ContentSecurityPolicy\Builder;
  */
 abstract class BaseTranslator
 {
-    const HEADER_NAME = 'Content-Security-Policy';
+    protected const HEADER_NAME = 'Content-Security-Policy';
 
     /**
      * @var Builder
@@ -24,12 +26,17 @@ abstract class BaseTranslator
     protected $builder;
 
     /**
-     * @param $headers
+     * @param HeaderBag $headers
      *
-     * @return string
+     * @return HeaderBag
      */
-    abstract public function translate($headers);
+    abstract public function translate(HeaderBag $headers): HeaderBag;
 
+    /**
+     * BaseTranslator constructor.
+     *
+     * @param Builder $builder
+     */
     public function __construct(Builder $builder)
     {
         $this->builder = $builder;

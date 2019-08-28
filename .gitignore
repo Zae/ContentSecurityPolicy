@@ -1,1 +1,5 @@
 /vendor/
+.network
+composer.lock
+docker-compose.yml
+docker

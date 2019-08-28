@@ -5,10 +5,11 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^5.4|^7.0"
+        "php": ">= 7.2"
     },
     "suggest": {
-        "paragonie/random_compat": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7"
+        "zae/csp-reporting": "Library to store the csp policy violations",
+        "zae/strict-transport-security": "Add HSTS header to your responses"
     },
     "authors": [
         {
@@ -24,5 +25,12 @@
     },
     "config": {
         "preferred-install": "dist"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zae\\ContentSecurityPolicy\\Laravel\\Providers\\ServiceProvider"
+            ]
+        }
     }
 }

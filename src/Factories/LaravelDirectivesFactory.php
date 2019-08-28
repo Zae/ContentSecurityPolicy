@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Factories;
 
@@ -7,9 +8,9 @@ namespace Zae\ContentSecurityPolicy\Factories;
  * @copyright Ezra Pool
  */
 
-use Zae\ContentSecurityPolicy\Contracts\Directive;
-use Zae\ContentSecurityPolicy\Builder;
-use Illuminate\Contracts\Config\Repository;
+use Zae\ContentSecurityPolicy\Contracts\Builder;
+use function is_numeric;
+use function is_string;
 
 /**
  * Class LaravelDirectivesFactory
@@ -19,13 +20,11 @@ use Illuminate\Contracts\Config\Repository;
 class LaravelDirectivesFactory
 {
     /**
-     * @param Builder    $builder
-     * @param Repository $config
+     * @param Builder $builder
+     * @param array   $directives
      */
-    public static function create(Builder &$builder, Repository $config)
+    public static function create(Builder $builder, array $directives = []): void
     {
-        $directives = (array)$config->get('csp');
-
         foreach ($directives as $directive => $settings) {
 
             /*

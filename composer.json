@@ -5,7 +5,7 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^5.5|^7.0",
+        "php": "^5.5|^7.0"
     },
     "require-dev": {
         "illuminate/support": "^5.0",

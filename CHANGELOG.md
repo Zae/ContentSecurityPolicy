@@ -5,6 +5,9 @@ All Notable changes to `Content Security Policy` will be documented in this file
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
 ## Unreleased
+- Added Craft 3.0 support
+- Refactoring to make supporting other platforms easier.
+- Twig `cspnonce()` function
 
 ## 2.0.0 - 2019-08-28
 - PHP 7.2+

@@ -6,6 +6,10 @@
 
 A really easy way to build CSP headers and add them to the response.
 
+Officially supported platforms:
+- Laravel: ^5.8
+- Craft: ^3.0
+
 ## Install
 
 Via Composer
@@ -65,6 +69,26 @@ Use the twig functions like this:
 <script nonce="{{ cspnonce() }}">
     // inline javascript
 </script>
+~~~
+
+#### Config (config/csp.php)
+
+~~~php
+return [
+    'components' => [
+        'builder' => Builder::class,
+    ],
+    'params' => [
+        BlockAllMixedContent::class,
+        Sandbox::class => [
+            Sandbox::ALLOW_FORMS,
+            Sandbox::ALLOW_SCRIPTS,
+            Sandbox::ALLOW_TOP_NAVIGATION,
+            Sandbox::ALLOW_SAME_ORIGIN,
+            Sandbox::ALLOW_POPUPS,
+        ]
+    ]
+];
 ~~~
 
 ### Other

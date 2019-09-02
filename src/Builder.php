@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy;
 
@@ -8,15 +9,18 @@ namespace Zae\ContentSecurityPolicy;
  */
 
 use Zae\ContentSecurityPolicy\Contracts\Directive;
+use function base64_encode;
+use function implode;
+use function random_bytes;
 
 /**
  * Class CSP
  *
  * @package Zae\ContentSecurityPolicy
  */
-class Builder implements Contracts\Builder
+class Builder implements Contracts\Builder, Contracts\NonceGenerator
 {
-    const NONCE_LENGTH = 12;
+    private const NONCE_LENGTH = 12;
     private static $nonce;
 
     /**
@@ -26,22 +30,43 @@ class Builder implements Contracts\Builder
 
     /**
      * CSP constructor.
+     *
+     * @throws \Exception
      */
-    function __construct()
+    public function __construct()
     {
+        /* do not change the nonce if the constructor
+           is called multiple times.
+        */
+        if (empty(static::$nonce)) {
+            static::$nonce = $this->generateNonce();
+        }
+
         $this->directives = new Collections\Directives();
-        static::$nonce = $this->generateNonce();
     }
 
     /**
      * @param Directive $source
+     *
+     * @throws \Exception
      */
-    public function setDirective(Directive $source)
+    public function setDirective(Directive $source): void
     {
         $this->directives->attach($source);
     }
 
-    public static function getNonce()
+    /**
+     * @return string
+     */
+    public function getNonce(): string
+    {
+        return static::getStaticNonce();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getStaticNonce(): string
     {
         return static::$nonce;
     }
@@ -57,13 +82,17 @@ class Builder implements Contracts\Builder
     /**
      * @return string
      */
-    private function build()
+    private function build(): string
     {
-        return join(';', $this->directives->toArray());
+        return implode(';', $this->directives->toArray());
     }
 
-    private function generateNonce()
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    private function generateNonce(): string
     {
-        return base64_encode(random_bytes(self::NONCE_LENGTH));
+        return base64_encode(random_bytes(static::NONCE_LENGTH));
     }
 }

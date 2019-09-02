@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -14,10 +15,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class FrameSrc extends Directive
 {
-    const KEY = 'frame-src';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'frame-src';
 }

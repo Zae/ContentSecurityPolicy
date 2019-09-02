@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -14,10 +15,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class ReportUri extends Directive
 {
-    const KEY = 'report-uri';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'report-uri';
 }

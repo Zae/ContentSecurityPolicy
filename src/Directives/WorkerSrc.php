@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -14,10 +15,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class WorkerSrc extends Directive
 {
-    const KEY = 'worker-src';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'worker-src';
 }

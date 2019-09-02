@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -7,8 +8,10 @@ namespace Zae\ContentSecurityPolicy\Directives;
  * @copyright Ezra Pool
  */
 
-use Zae\ContentSecurityPolicy\Contracts\Directive as DirectiveContract;
 use Zae\ContentSecurityPolicy\Builder;
+use Zae\ContentSecurityPolicy\Contracts\Directive as DirectiveContract;
+use function implode;
+use function sprintf;
 
 /**
  * Class Directive
@@ -17,14 +20,24 @@ use Zae\ContentSecurityPolicy\Builder;
  */
 abstract class Directive implements DirectiveContract
 {
-    const SELF              = "'self'";
-    const UNSAFE_INLINE     = "'unsafe-inline'";
-    const UNSAFE_EVAL       = "'unsafe-eval'";
-    const STRICT_DYNAMIC    = "'strict-dynamic'";
-    const NONCE             = 'nonce';
-    const NONE              = "'none'";
+    public const KEY            = '';
 
-    abstract function getKey();
+    public const SELF           = "'self'";
+    public const UNSAFE_INLINE  = "'unsafe-inline'";
+    public const UNSAFE_EVAL    = "'unsafe-eval'";
+    public const STRICT_DYNAMIC = "'strict-dynamic'";
+    public const NONCE          = 'nonce';
+    public const NONE           = "'none'";
+
+    /**
+     * Get the key of the directive
+     *
+     * @return mixed
+     */
+    public function getKey(): string
+    {
+        return static::KEY;
+    }
 
     protected $values = [];
 
@@ -45,17 +58,28 @@ abstract class Directive implements DirectiveContract
     /**
      * @param string $source
      */
-    public function addValue($source)
+    public function addValue($source): void
     {
         if ($source === static::NONCE) {
-            $source = sprintf("'%s-%s'", 'nonce', Builder::getNonce());
+            $source = sprintf(
+                "'%s-%s'",
+                'nonce',
+                Builder::getStaticNonce()
+            );
         }
 
         $this->values[] = $source;
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
-        return sprintf('%s %s', $this->getKey(), join(' ', $this->values));
+        return sprintf(
+            '%s %s',
+            $this->getKey(),
+            implode(' ', $this->values)
+        );
     }
 }

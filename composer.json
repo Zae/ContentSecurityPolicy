@@ -5,7 +5,7 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^5.5|^7.0"
+      "php": ">= 7.2"
     },
     "require-dev": {
         "illuminate/support": "^5.0",
@@ -14,7 +14,8 @@
         "craftcms/cms": "^3.0"
     },
     "suggest": {
-        "paragonie/random_compat": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+        "zae/csp-reporting": "Library to store the csp policy violations",
+        "zae/strict-transport-security": "Add HSTS header to your responses",
         "illuminate/support": "The included laravel/craft extension requires at least laravel support 5.0 or the complete framework",
         "illuminate/http": "The included laravel extension requires at least laravel http 5.0 or the complete framework",
         "twig/twig": "The included twig extension requires at least twig 2.7",
@@ -34,5 +35,12 @@
     },
     "config": {
         "preferred-install": "dist"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zae\\ContentSecurityPolicy\\Laravel\\Providers\\ServiceProvider"
+            ]
+        }
     }
 }

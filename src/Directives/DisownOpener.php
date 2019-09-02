@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
 
@@ -16,10 +17,5 @@ namespace Zae\ContentSecurityPolicy\Directives;
  */
 class DisownOpener extends Directive
 {
-    const KEY = 'disown-opener';
-
-    function getKey()
-    {
-        return static::KEY;
-    }
+    public const KEY = 'disown-opener';
 }

@@ -1,6 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Directives;
+
+use function sprintf;
 
 /**
  * @author    Ezra Pool <ezra@tsdme.nl>
@@ -12,9 +15,12 @@ namespace Zae\ContentSecurityPolicy\Directives;
  *
  * @package Zae\ContentSecurityPolicy\Directives
  */
-abstract class NoValueDirective extends Directive
+trait NoValueDirective
 {
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return sprintf('%s', $this->getKey());
     }

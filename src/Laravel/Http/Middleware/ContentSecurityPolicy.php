@@ -1,9 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Laravel\Http\Middleware;
 
 use Closure;
-use Zae\ContentSecurityPolicy\Contracts\Builder as CSPContract;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Http\Request;
+use Zae\ContentSecurityPolicy\Contracts\Builder;
+use Zae\ContentSecurityPolicy\Factories\LaravelDirectivesFactory;
 use Zae\ContentSecurityPolicy\Translators\Laravel;
 use Illuminate\Http\Response;
 
@@ -14,37 +18,46 @@ use Illuminate\Http\Response;
  */
 class ContentSecurityPolicy
 {
-    const CSP_NONCE_SESSION_KEY = 'CSP_NONCE';
-
     /**
-     * @var \Zae\ContentSecurityPolicy\Builder
+     * @var Builder
      */
     private $builder;
+    /**
+     * @var Repository
+     */
+    private $config;
 
     /**
      * Create a new middleware instance.
      *
-     * @param CSPContract $builder
+     * @param Builder    $builder
+     * @param Repository $config
      */
-    public function __construct(CSPContract $builder)
+    public function __construct(Builder $builder, Repository $config)
     {
         $this->builder = $builder;
+        $this->config = $config;
     }
 
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         /** @var Response $response */
         $response = $next($request);
 
-        $request->session()->set(static::CSP_NONCE_SESSION_KEY, $this->builder->getNonce());
-        $response->headers = (new Laravel($this->builder))->translate($response->headers);
+        LaravelDirectivesFactory::create(
+            $this->builder,
+            (array)$this->config->get('csp')
+        );
+
+        (new Laravel($this->builder))
+            ->translate($response->headers);
 
         return $response;
     }

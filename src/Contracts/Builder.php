@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Contracts;
 
@@ -17,5 +18,5 @@ interface Builder
     /**
      * @param Directive $source
      */
-    public function setDirective(Directive $source);
+    public function setDirective(Directive $source): void;
 }

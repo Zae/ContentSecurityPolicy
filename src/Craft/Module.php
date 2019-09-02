@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Craft;
 
@@ -12,6 +13,9 @@ use Craft;
 use yii\base\Event;
 use yii\web\Application;
 use Zae\ContentSecurityPolicy\Contracts\Builder;
+use Zae\ContentSecurityPolicy\Factories\ArrayDirectivesFactory;
+use Zae\ContentSecurityPolicy\Translators\AdapterTranslator;
+use Zae\ContentSecurityPolicy\Translators\HeaderCollectionAdapter;
 use Zae\ContentSecurityPolicy\Twig\Extensions\ContentSecurityPolicy;
 
 /**
@@ -42,7 +46,7 @@ class Module extends \yii\base\Module
     /**
      * Register the events in Craft / Yii
      */
-    private function initializeEvents()
+    private function initializeEvents(): void
     {
         Event::on(
             Application::class,
@@ -53,28 +57,20 @@ class Module extends \yii\base\Module
 
     /**
      * Inject Link header into the request just before we send it, so we can preload our most important resources.
+     *
+     * @throws \yii\base\InvalidConfigException
      */
-    private function injectSecurityHeaders()
+    private function injectSecurityHeaders(): void
     {
-        $elements = $this->params;
-
         /** @var Builder $builder */
         $builder = $this->get('builder');
 
-        foreach ($elements as $directive => $settings) {
-            /*
-            * support simple array structures for directives that take no
-            * values, they will be values of the input array, not the keys.
-            */
+        ArrayDirectivesFactory::create(
+            $builder,
+            (array)$this->params
+        );
 
-            if (is_numeric($directive) && is_string($settings)) {
-                $directive = $settings;
-                $settings = [];
-            }
-
-            $builder->setDirective(new $directive($settings));
-        }
-
-        Craft::$app->response->headers->set('Content-Security-Policy', (string)$builder);
+        (new AdapterTranslator($builder))
+            ->translate(new HeaderCollectionAdapter(Craft::$app->response->headers));
     }
 }

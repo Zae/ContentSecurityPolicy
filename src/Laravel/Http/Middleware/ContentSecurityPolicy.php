@@ -7,8 +7,9 @@ use Closure;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Http\Request;
 use Zae\ContentSecurityPolicy\Contracts\Builder;
-use Zae\ContentSecurityPolicy\Factories\LaravelDirectivesFactory;
-use Zae\ContentSecurityPolicy\Translators\Laravel;
+use Zae\ContentSecurityPolicy\Factories\ArrayDirectivesFactory;
+use Zae\ContentSecurityPolicy\Translators\AdapterTranslator;
+use Zae\ContentSecurityPolicy\Translators\HeaderBagAdapter;
 use Illuminate\Http\Response;
 
 /**
@@ -51,13 +52,13 @@ class ContentSecurityPolicy
         /** @var Response $response */
         $response = $next($request);
 
-        LaravelDirectivesFactory::create(
+        ArrayDirectivesFactory::create(
             $this->builder,
             (array)$this->config->get('csp')
         );
 
-        (new Laravel($this->builder))
-            ->translate($response->headers);
+        (new AdapterTranslator($this->builder))
+            ->translate(new HeaderBagAdapter($response->headers));
 
         return $response;
     }

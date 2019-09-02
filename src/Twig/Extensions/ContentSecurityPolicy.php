@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Zae\ContentSecurityPolicy\Twig\Extensions;
 
@@ -34,7 +35,7 @@ class ContentSecurityPolicy extends AbstractExtension
     public function getFunctions()
     {
         return [
-            'cspnonce' => new TwigFunction('cspnonce', [Builder::class, 'getNonce']),
+            'cspnonce' => new TwigFunction('cspnonce', [Builder::class, 'getStaticNonce']),
         ];
     }
 }

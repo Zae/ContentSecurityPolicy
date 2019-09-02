@@ -8,8 +8,8 @@ namespace Zae\ContentSecurityPolicy\Translators;
  * @copyright Ezra Pool
  */
 
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Zae\ContentSecurityPolicy\Contracts\Builder;
+use Zae\ContentSecurityPolicy\Contracts\Headers;
 
 /**
  * Class BaseTranslator
@@ -26,11 +26,9 @@ abstract class BaseTranslator
     protected $builder;
 
     /**
-     * @param HeaderBag $headers
-     *
-     * @return HeaderBag
+     * @param Headers $headers
      */
-    abstract public function translate(HeaderBag $headers): HeaderBag;
+    abstract public function translate(Headers $headers): void;
 
     /**
      * BaseTranslator constructor.

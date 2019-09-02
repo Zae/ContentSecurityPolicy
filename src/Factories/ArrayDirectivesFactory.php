@@ -13,11 +13,11 @@ use function is_numeric;
 use function is_string;
 
 /**
- * Class LaravelDirectivesFactory
+ * Class ArrayDirectivesFactory
  *
  * @package Zae\ContentSecurityPolicy\Factories
  */
-class LaravelDirectivesFactory
+class ArrayDirectivesFactory
 {
     /**
      * @param Builder $builder

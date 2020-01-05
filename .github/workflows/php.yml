@@ -48,5 +48,9 @@ jobs:
       - name: Run test suite
         run: composer run test
 
-      - name: Coveralls
-        run: composer run coveralls
+      - name: CodeCov
+        uses: codecov/codecov-action@v1.0.5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} #required
+          file: ./clover.xml #optional
+

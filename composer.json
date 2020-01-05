@@ -12,8 +12,7 @@
         "illuminate/http": "^5.0 | ^6.0",
         "twig/twig": "^2.7",
         "craftcms/cms": "^3.0",
-        "orchestra/testbench": "^4.4",
-        "php-coveralls/php-coveralls": "^2.2"
+        "orchestra/testbench": "^4.4"
     },
     "suggest": {
         "zae/csp-reporting": "Library to store the csp policy violations",
@@ -45,10 +44,7 @@
     },
     "scripts": {
         "test": [
-            "@php -dpcov.enabled=1 -dpcov.directory=src -dpcov.exclude=~vendor~ vendor/bin/phpunit --coverage-text --coverage-clover=clover.xml"
-        ],
-        "coveralls": [
-            "@php vendor/bin/php-coveralls --coverage_clover=clover.xml --json_path=coveralls-upload.json"
+            "@php -dpcov.enabled=1 -dpcov.directory=src -dpcov.exclude=~vendor~ vendor/bin/phpunit --coverage-text --coverage-clover=clover.xml --coverage-php=coverage.lcov"
         ]
     },
     "extra": {

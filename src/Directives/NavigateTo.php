@@ -15,7 +15,7 @@ namespace Zae\ContentSecurityPolicy\Directives;
  *
  * @package Zae\ContentSecurityPolicy\Directives
  */
-class NavigationTo extends Directive
+class NavigateTo extends Directive
 {
-    public const KEY = 'navigation-to';
+    public const KEY = 'navigate-to';
 }

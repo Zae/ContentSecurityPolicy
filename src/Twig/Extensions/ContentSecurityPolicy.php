@@ -23,6 +23,7 @@ class ContentSecurityPolicy extends AbstractExtension
      * Returns the name of the extension.
      *
      * @return string The extension name
+     * @codeCoverageIgnore
      */
     public function getName()
     {

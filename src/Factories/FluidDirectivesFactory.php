@@ -22,7 +22,7 @@ use Zae\ContentSecurityPolicy\Directives\FrameSrc;
 use Zae\ContentSecurityPolicy\Directives\ImgSrc;
 use Zae\ContentSecurityPolicy\Directives\ManifestSrc;
 use Zae\ContentSecurityPolicy\Directives\MediaSrc;
-use Zae\ContentSecurityPolicy\Directives\NavigationTo;
+use Zae\ContentSecurityPolicy\Directives\NavigateTo;
 use Zae\ContentSecurityPolicy\Directives\ObjectSrc;
 use Zae\ContentSecurityPolicy\Directives\PluginTypes;
 use Zae\ContentSecurityPolicy\Directives\ReportTo;
@@ -51,7 +51,7 @@ use Zae\ContentSecurityPolicy\Directives\WorkerSrc;
  * @method $this imgSrc(array|string $settings=[]);
  * @method $this manifestSrc(array|string $settings=[]);
  * @method $this mediaSrc(array|string $settings=[]);
- * @method $this navigationTo(array|string $settings=[]);
+ * @method $this navigateTo(array|string $settings=[]);
  * @method $this objectSrc(array|string $settings=[]);
  * @method $this pluginTypes(array|string $settings=[]);
  * @method $this reportTo(array|string $settings=[]);
@@ -78,7 +78,7 @@ class FluidDirectivesFactory
         'imgSrc'                    => ImgSrc::class,
         'manifestSrc'               => ManifestSrc::class,
         'mediaSrc'                  => MediaSrc::class,
-        'navigationTo'              => NavigationTo::class,
+        'navigateTo'                => NavigateTo::class,
         'objectSrc'                 => ObjectSrc::class,
         'pluginTypes'               => PluginTypes::class,
         'reportTo'                  => ReportTo::class,

@@ -11,7 +11,8 @@
         "illuminate/support": "^5.0 | ^6.0",
         "illuminate/http": "^5.0 | ^6.0",
         "twig/twig": "^2.7",
-        "craftcms/cms": "^3.0"
+        "craftcms/cms": "^3.0",
+        "orchestra/testbench": "^4.4"
     },
     "suggest": {
         "zae/csp-reporting": "Library to store the csp policy violations",
@@ -33,8 +34,18 @@
             "Zae\\ContentSecurityPolicy\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Zae\\ContentSecurityPolicy\\Tests\\": "tests/"
+        }
+    },
     "config": {
         "preferred-install": "dist"
+    },
+    "scripts": {
+        "test": [
+            "@php -dpcov.enabled=1 -dpcov.directory=src -dpcov.exclude=~vendor~ vendor/bin/phpunit --coverage-text"
+        ]
     },
     "extra": {
         "laravel": {

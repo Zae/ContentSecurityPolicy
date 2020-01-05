@@ -3,6 +3,7 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
+[![codecov](https://codecov.io/gh/Zae/ContentSecurityPolicy/branch/master/graph/badge.svg)](https://codecov.io/gh/Zae/ContentSecurityPolicy)
 
 A really easy way to build CSP headers and add them to the response.
 

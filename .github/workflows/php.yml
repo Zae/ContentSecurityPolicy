@@ -44,7 +44,7 @@ jobs:
         run: composer validate
 
       - name: Install dependencies
-        run: composer update --${{ matrix.dependency-version }} --no-interaction --no-suggest --ignore-platform-reqs --prefer-dist
+        run: composer update --${{ matrix.dependency-version }} --no-interaction --no-suggest --prefer-dist
 
       - name: Run test suite
         run: composer run test

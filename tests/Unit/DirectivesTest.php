@@ -18,10 +18,15 @@ use Zae\ContentSecurityPolicy\Directives\MediaSrc;
 use Zae\ContentSecurityPolicy\Directives\NavigateTo;
 use Zae\ContentSecurityPolicy\Directives\ObjectSrc;
 use Zae\ContentSecurityPolicy\Directives\PluginTypes;
+use Zae\ContentSecurityPolicy\Directives\PrefetchSrc;
 use Zae\ContentSecurityPolicy\Directives\ReportUri;
 use Zae\ContentSecurityPolicy\Directives\Sandbox;
 use Zae\ContentSecurityPolicy\Directives\ScriptSrc;
+use Zae\ContentSecurityPolicy\Directives\ScriptSrcAttr;
+use Zae\ContentSecurityPolicy\Directives\ScriptSrcElem;
 use Zae\ContentSecurityPolicy\Directives\StyleSrc;
+use Zae\ContentSecurityPolicy\Directives\StyleSrcAttr;
+use Zae\ContentSecurityPolicy\Directives\StyleSrcElem;
 use Zae\ContentSecurityPolicy\Directives\UpgradeInsecureRequests;
 use Zae\ContentSecurityPolicy\Directives\WorkerSrc;
 
@@ -194,16 +199,16 @@ class DirectivesTest extends TestCase
             [PluginTypes::class, ['application/x-java-applet'], 'plugin-types application/x-java-applet'],
             [PluginTypes::class, ['application/x-java-applet', 'application/x-shockwave-flash'], 'plugin-types application/x-java-applet application/x-shockwave-flash'],
 
-//            [PrefetchSrc::class, ['*'], 'prefetch-src *'],
-//            [PrefetchSrc::class, ['self'], 'prefetch-src self'],
-//            [PrefetchSrc::class, ['unsafe-eval'], 'prefetch-src unsafe-eval'],
-//            [PrefetchSrc::class, ['unsafe-hashes'], 'prefetch-src unsafe-hashes'],
-//            [PrefetchSrc::class, ['unsafe-inline'], 'prefetch-src unsafe-inline'],
-//            [PrefetchSrc::class, ["'none'"], "prefetch-src 'none'"],
-//            [PrefetchSrc::class, ['strict-dynamic'], 'prefetch-src strict-dynamic'],
-//            [PrefetchSrc::class, ['http:', 'https:'], 'prefetch-src http: https:'],
-//            [PrefetchSrc::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'prefetch-src self unsafe-eval unsafe-hashes unsafe-inline'],
-//            [PrefetchSrc::class, ['https://example.com'], 'prefetch-src https://example.com'],
+            [PrefetchSrc::class, ['*'], 'prefetch-src *'],
+            [PrefetchSrc::class, ['self'], 'prefetch-src self'],
+            [PrefetchSrc::class, ['unsafe-eval'], 'prefetch-src unsafe-eval'],
+            [PrefetchSrc::class, ['unsafe-hashes'], 'prefetch-src unsafe-hashes'],
+            [PrefetchSrc::class, ['unsafe-inline'], 'prefetch-src unsafe-inline'],
+            [PrefetchSrc::class, ["'none'"], "prefetch-src 'none'"],
+            [PrefetchSrc::class, ['strict-dynamic'], 'prefetch-src strict-dynamic'],
+            [PrefetchSrc::class, ['http:', 'https:'], 'prefetch-src http: https:'],
+            [PrefetchSrc::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'prefetch-src self unsafe-eval unsafe-hashes unsafe-inline'],
+            [PrefetchSrc::class, ['https://example.com'], 'prefetch-src https://example.com'],
 
             [ReportUri::class, ['/csp-report'], 'report-uri /csp-report'],
             [ReportUri::class, ['/csp-report', '/backup-report'], 'report-uri /csp-report /backup-report'],
@@ -233,6 +238,28 @@ class DirectivesTest extends TestCase
             [ScriptSrc::class, ['http:', 'https:'], 'script-src http: https:'],
             [ScriptSrc::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'script-src self unsafe-eval unsafe-hashes unsafe-inline'],
             [ScriptSrc::class, ['https://example.com'], 'script-src https://example.com'],
+           
+            [ScriptSrcAttr::class, ['*'], 'script-src-attr *'],
+            [ScriptSrcAttr::class, ['self'], 'script-src-attr self'],
+            [ScriptSrcAttr::class, ['unsafe-eval'], 'script-src-attr unsafe-eval'],
+            [ScriptSrcAttr::class, ['unsafe-hashes'], 'script-src-attr unsafe-hashes'],
+            [ScriptSrcAttr::class, ['unsafe-inline'], 'script-src-attr unsafe-inline'],
+            [ScriptSrcAttr::class, ["'none'"], "script-src-attr 'none'"],
+            [ScriptSrcAttr::class, ['strict-dynamic'], 'script-src-attr strict-dynamic'],
+            [ScriptSrcAttr::class, ['http:', 'https:'], 'script-src-attr http: https:'],
+            [ScriptSrcAttr::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'script-src-attr self unsafe-eval unsafe-hashes unsafe-inline'],
+            [ScriptSrcAttr::class, ['https://example.com'], 'script-src-attr https://example.com'],
+          
+            [ScriptSrcElem::class, ['*'], 'script-src-elem *'],
+            [ScriptSrcElem::class, ['self'], 'script-src-elem self'],
+            [ScriptSrcElem::class, ['unsafe-eval'], 'script-src-elem unsafe-eval'],
+            [ScriptSrcElem::class, ['unsafe-hashes'], 'script-src-elem unsafe-hashes'],
+            [ScriptSrcElem::class, ['unsafe-inline'], 'script-src-elem unsafe-inline'],
+            [ScriptSrcElem::class, ["'none'"], "script-src-elem 'none'"],
+            [ScriptSrcElem::class, ['strict-dynamic'], 'script-src-elem strict-dynamic'],
+            [ScriptSrcElem::class, ['http:', 'https:'], 'script-src-elem http: https:'],
+            [ScriptSrcElem::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'script-src-elem self unsafe-eval unsafe-hashes unsafe-inline'],
+            [ScriptSrcElem::class, ['https://example.com'], 'script-src-elem https://example.com'],
             
             [StyleSrc::class, ['*'], 'style-src *'],
             [StyleSrc::class, ['self'], 'style-src self'],
@@ -244,6 +271,28 @@ class DirectivesTest extends TestCase
             [StyleSrc::class, ['http:', 'https:'], 'style-src http: https:'],
             [StyleSrc::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'style-src self unsafe-eval unsafe-hashes unsafe-inline'],
             [StyleSrc::class, ['https://example.com'], 'style-src https://example.com'],
+
+            [StyleSrcAttr::class, ['*'], 'style-src-attr *'],
+            [StyleSrcAttr::class, ['self'], 'style-src-attr self'],
+            [StyleSrcAttr::class, ['unsafe-eval'], 'style-src-attr unsafe-eval'],
+            [StyleSrcAttr::class, ['unsafe-hashes'], 'style-src-attr unsafe-hashes'],
+            [StyleSrcAttr::class, ['unsafe-inline'], 'style-src-attr unsafe-inline'],
+            [StyleSrcAttr::class, ["'none'"], "style-src-attr 'none'"],
+            [StyleSrcAttr::class, ['strict-dynamic'], 'style-src-attr strict-dynamic'],
+            [StyleSrcAttr::class, ['http:', 'https:'], 'style-src-attr http: https:'],
+            [StyleSrcAttr::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'style-src-attr self unsafe-eval unsafe-hashes unsafe-inline'],
+            [StyleSrcAttr::class, ['https://example.com'], 'style-src-attr https://example.com'],
+
+            [StyleSrcElem::class, ['*'], 'style-src-elem *'],
+            [StyleSrcElem::class, ['self'], 'style-src-elem self'],
+            [StyleSrcElem::class, ['unsafe-eval'], 'style-src-elem unsafe-eval'],
+            [StyleSrcElem::class, ['unsafe-hashes'], 'style-src-elem unsafe-hashes'],
+            [StyleSrcElem::class, ['unsafe-inline'], 'style-src-elem unsafe-inline'],
+            [StyleSrcElem::class, ["'none'"], "style-src-elem 'none'"],
+            [StyleSrcElem::class, ['strict-dynamic'], 'style-src-elem strict-dynamic'],
+            [StyleSrcElem::class, ['http:', 'https:'], 'style-src-elem http: https:'],
+            [StyleSrcElem::class, ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline'], 'style-src-elem self unsafe-eval unsafe-hashes unsafe-inline'],
+            [StyleSrcElem::class, ['https://example.com'], 'style-src-elem https://example.com'],
 
             [UpgradeInsecureRequests::class, [], 'upgrade-insecure-requests'],
 

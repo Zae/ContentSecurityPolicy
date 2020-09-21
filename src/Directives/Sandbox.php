@@ -27,4 +27,5 @@ class Sandbox extends Directive
     public const ALLOW_SAME_ORIGIN = 'allow-same-origin';
     public const ALLOW_SCRIPTS = 'allow-scripts';
     public const ALLOW_TOP_NAVIGATION = 'allow-top-navigation';
+    public const ALLOW_DOWNLOADS = 'allow-downloads';
 }
